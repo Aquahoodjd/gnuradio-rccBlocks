@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<block>
+  <name>square3_ff</name>
+  <key>rccBlocks_square3_ff</key>
+  <category>rccBlocks</category>
+  <import>import rccBlocks</import>
+  <make>rccBlocks.square3_ff()</make>
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>float</type>
+  </source>
+</block>
