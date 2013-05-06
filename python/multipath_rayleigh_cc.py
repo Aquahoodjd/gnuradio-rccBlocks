@@ -19,16 +19,135 @@
 # 
 
 from gnuradio import gr
+import rccBlocks
+import numpy as np
 
 class multipath_rayleigh_cc(gr.hier_block2):
-    """
-    docstring for block multipath_rayleigh_cc
-    """
-    def __init__(self, src,vehicle_speed,carrier_freq,chan_rate,chan_seed,chan_pwrs,path_delays,flag_indep=False,flag_norm=True):
-        gr.hier_block2.__init__(self,
-            "multipath_rayleigh_cc",
-            gr.io_signature(<+MIN_IN+>, <+MAX_IN+>, gr.sizeof_<+float+>),  # Input signature
-            gr.io_signature(<+MIN_OUT+>, <+MAX_OUT+>, gr.sizeof_<+float+>)) # Output signature
+	"""
+    
+	Applies multipath Rayleigh fadding to a complex stream input.
 
-            # Define blocks and connect them
-            self.connect()
+	@param fg: 			flowgraph
+	@param src: 		Block which forms the head of the multipath channel.
+						This is a temporary work around. Ideally this head block would not need
+						to be passed to this class.
+	@param vehicle_speed: 	This is the speed at which the vehicle is travling in km/h.
+	@type vehicle_speed:	float
+	@param carrier_freq: 	Transmission carrier frequancy in Hz.
+	@type carrier_freq: 	float
+	@param chan_rate: 	The sample rate at which the channel is operating (Samples/second).
+	@type chan_rate: 	float
+	@param chan_seed:  	Used to seed the channels. Each new channel is seeded with chan_seed++.
+	@type chan_seed: 	interger
+	@param chan_pwrs:	Array containing the square root power of the fading waveform for each path
+						(e.g. pwr = 5 would produce a fading waveform with an 
+						output power of 25).
+	@type chan_pwrs: 	array of floats
+	@param path_delays:	Array of path delays in micro-seconds. Note the delay time resolution is
+						dependent on the sample rate of the channel. For example, a channel operating at 
+						256k samples/second, delays will be nearest integer multiples of 0.256.
+	@type path_delays: 	array of ints
+	@param flag_indep: 	Determines whether individual blocks processed by the channel should 
+						be treated as independent blocks or as one continuous block.
+						1 if blocks are independent, 0 if continuous across blocks.
+						By default blocks are not treated independently.
+	@type flag_indep: 	bool
+	@param flag_norm: 	Determines whether the total output power should be normalized.
+						If this is true then the values of chan_pwrs are relative only.
+						By default the channel is normalized.
+	@type flag_norm: 	bool
+	
+	"""
+	def __init__(self,vehicle_speed,carrier_freq,chan_rate,chan_seed,chan_pwrs,path_delays,flag_indep=False,flag_norm=True):
+		gr.hier_block2.__init__(self,
+		    "multipath_rayleigh_cc",
+		    gr.io_signature(1, 1, gr.sizeof_gr_complex*1),  # Input signature
+		    gr.io_signature(1, 1, gr.sizeof_gr_complex*1)) # Output signature
+
+		    # Define blocks and connect them
+            
+		##################################################
+		# Parameters
+		##################################################
+		self.vehicle_speed = vehicle_speed
+		self.chan_rate = chan_rate
+		self.carrier_freq = carrier_freq
+		self.chan_pwrs = chan_pwrs
+		self.path_delays_us = path_delays
+		self.chan_seed = chan_seed
+           
+		# Checks that there is the same number of delays as there are powers.
+		if len(self.chan_pwrs) != len(self.path_delays_us):
+			raise ValueError, "The vector length of chan_pwrs does not match the vector length of path_delays."
+			# Could this be improved?
+			sys.exit(1)
+		##################################################
+		# Constants
+		##################################################
+		# Speed of light in km/h
+		speed_of_light = 3e8 * 3.6
+		
+		##################################################
+		# Variables
+		##################################################
+		# vehicle_speed (km/h), carrier_freq (Hz) and speed_of_light (km/h)
+		# units: (km/h * Hz) / (km/h) = Hz. 
+		fd = (vehicle_speed * carrier_freq) / speed_of_light
+		# channel rate in samples/micro-seconds
+		chan_rate_us = chan_rate * 1e-6
+		# stores the path delays translated from micro-seconds to 
+		# equivalent delays in samples (based on the channel rate)
+		self.path_delays_samples = path_delays_samples = np.round(np.array(self.path_delays_us)*chan_rate_us)
+		self.fD = fD = (((1.0*vehicle_speed/3.6)*carrier_freq)/3e8)*(1.0/chan_rate)
+		print 'self.fD =', self.fD
+		
+		
+		
+		# 'T' is the inverse channel rate.
+		self.fdT = fd * (1.0 / chan_rate)
+		# Testing only
+		print "self.fdT = ", self.fdT
+		
+		# Warn the user of the limited channel delay resolution
+		if chan_rate_us < 1:
+			print "Warning: at a channel rate of ", chan_rate, \
+			" samples/s the delay resolution is ", 1.0/chan_rate, "seconds"
+		
+		self.c2f_blks = [] 		# for list of gr.complex_to_float().
+		self.delay_blks = [] 	# for list of gr.filter_delay_fc ().
+		self.chan_blks = [] 	# for list of tait.flat_rayleigh_channel_cc().
+		
+					
+			
+		# For testing only	
+		print "path delays in samples ", self.path_delays_samples
+		
+		# Normalizes the channel powers if required
+		if flag_norm is True:
+			self.chan_pwrs = 1.0*np.array(chan_pwrs)/np.sqrt((chan_pwrs ** 2).sum(-1))
+			
+				
+		# Populate the lists above with the correct number of blocks.
+		for i in range (len(self.path_delays_samples)):
+			print "create delay block %d" %(i)
+			
+			# Delay block is required.
+			self.delay_blks.append(gr.delay(gr.sizeof_gr_complex*1, int(self.path_delays_samples[i])))
+				
+			self.chan_blks.append(rccBlocks.channelModel_cc(chan_seed + i, self.fdT, self.chan_pwrs[i], flag_indep))
+		
+		
+		self.sum = gr.add_vcc(1)  
+		
+		# Create multiple instances of the "src -> delay -> channel" connection.
+		for i in range (len(self.chan_blks)):
+			print i
+			self.connect( (self,0), (self.chan_blks[i],0) )
+			self.connect( (self.chan_blks[i],0), (self.delay_blks[i],0) )
+			self.connect( (self.delay_blks[i],0), (self.sum, i) )
+		#self.connect( (self,0), (self.chan_blks[0],0) )
+		#self.connect( (self.chan_blks[0],0), (self.delay_blks[0],0) )
+		#self.connect( (self.delay_blks[0],0), (self, 0) )	
+		self.connect((self.sum, 0), (self,0) )         
+		
+		

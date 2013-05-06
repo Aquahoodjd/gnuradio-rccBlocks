@@ -4,16 +4,63 @@
   <key>rccBlocks_multipath_rayleigh_cc</key>
   <category>rccBlocks</category>
   <import>import rccBlocks</import>
-  <make>rccBlocks.multipath_rayleigh_cc(src, vehicle_speed, carrier_freq, chan_rate, chan_seed, chan_pwrs, path_delays, flag_indep, flag_norm)</make>
+  <import>from random import randint</import>
+  <make>rccBlocks.multipath_rayleigh_cc($vehicle_speed, $carrier_freq, $chan_rate, $chan_seed, $chan_pwrs, $path_delays, $flag_indep, $flag_norm)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
   <param>
-    <name>...</name>
-    <key>...</key>
-    <type>...</type>
+    <name>Velocity, km/h</name>
+	<key>vehicle_speed</key>
+	<value>100</value>
+	<type>real</type>
+  </param>
+  
+  <param>
+    <name>RF Freq, Hz</name>
+	<key>carrier_freq</key>
+	<type>real</type>
+  </param>
+  
+  <param>
+    <name>Chan Sample Rate, Hz</name>
+	<key>chan_rate</key>
+	<type>real</type>
+  </param>
+  
+  <param>
+    <name>Chan Seed</name>
+	<key>chan_seed</key>
+	<value>randint(-10e3, 10e3)</value>
+	<type>int</type>
+  </param>
+  
+  <param>
+    <name>Path Powers</name>
+	<key>chan_pwrs</key>
+	<type>real_vector</type>
+  </param>
+  
+  <param>
+    <name>Path Delays, us</name>
+	<key>path_delays</key>
+	<type>int_vector</type>
+  </param>
+  
+  <param>
+    <name>Indep Block</name>
+	<key>flag_indep</key>
+	<value>0</value>
+	<type>int</type>
+  </param>
+  
+  <param>
+    <name>Norm Path Pwrs</name>
+	<key>flag_norm</key>
+	<value>1</value>
+	<type>int</type>
   </param>
 
   <!-- Make one 'sink' node per input. Sub-nodes:
@@ -22,8 +69,8 @@
        * vlen
        * optional (set to 1 for optional inputs) -->
   <sink>
-    <name>in</name>
-    <type><!-- e.g. int, real, complex, byte, short, xxx_vector, ...--></type>
+		<name>in</name>
+		<type>complex</type>
   </sink>
 
   <!-- Make one 'source' node per output. Sub-nodes:
@@ -32,7 +79,7 @@
        * vlen
        * optional (set to 1 for optional inputs) -->
   <source>
-    <name>out</name>
-    <type><!-- e.g. int, real, complex, byte, short, xxx_vector, ...--></type>
-  </source>
+		<name>out</name>
+		<type>complex</type>
+	</source>
 </block>
