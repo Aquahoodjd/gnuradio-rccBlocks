@@ -22,7 +22,7 @@
 #define INCLUDED_RCCBLOCKS_CHANNELMODEL_CC_IMPL_H
 
 #include <rccBlocks/channelModel_cc.h>
-#include <flat_rayleigh.h>
+#include "flat_rayleigh.h"
 
 namespace gr {
   namespace rccBlocks {
