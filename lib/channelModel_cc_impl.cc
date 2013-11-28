@@ -22,26 +22,28 @@
 #include "config.h"
 #endif
 
+#include <inttypes.h>
 #include <gr_io_signature.h>
 #include "channelModel_cc_impl.h"
+
 
 namespace gr {
   namespace rccBlocks {
 
     channelModel_cc::sptr
-    channelModel_cc::make(int seed, float fD, float pwr, bool flag_indep)
+    channelModel_cc::make(int32_t seed, float fD, float pwr, bool flag_indep)
     {
       return gnuradio::get_initial_sptr (new channelModel_cc_impl(seed, fD, pwr, flag_indep));
     }
-static const int MIN_IN = 1;	// mininum number of input streams
-static const int MAX_IN = 1;	// maximum number of input streams
-static const int MIN_OUT = 1;	// minimum number of output streams
-static const int MAX_OUT = 1;	// maximum number of output streams
+static const int32_t MIN_IN = 1;	// mininum number of input streams
+static const int32_t MAX_IN = 1;	// maximum number of input streams
+static const int32_t MIN_OUT = 1;	// minimum number of output streams
+static const int32_t MAX_OUT = 1;	// maximum number of output streams
 
     /*
      * The private constructor
      */
-    channelModel_cc_impl::channelModel_cc_impl(int seed, float fD, float pwr, bool flag_indep)
+    channelModel_cc_impl::channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep)
       : gr_sync_block("channelModel_cc",
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)),
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)))
@@ -58,8 +60,8 @@ static const int MAX_OUT = 1;	// maximum number of output streams
 		delete mychan;
     }
 
-    int
-    channelModel_cc_impl::work(int noutput_items,
+    int32_t
+    channelModel_cc_impl::work(int32_t noutput_items,
 			  gr_vector_const_void_star &input_items,
 			  gr_vector_void_star &output_items)
     {

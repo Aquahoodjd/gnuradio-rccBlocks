@@ -1,15 +1,17 @@
+#include <inttypes.h>
+#include <math.h>
 #include "random.h"
 
 /***********************************************************/
 /* Returns a uniform RV in (0,1)                           */
 /* Any seed<-1 can be used                                 */
 /***********************************************************/
-float Uniform(long *idum)
+float Uniform(int32_t *idum)
 {
-        int j;
-        long k;
-        static long iy=0;
-        static long iv[Ntab];
+        int32_t j;
+        int32_t k;
+        static int32_t iy=0;
+        static int32_t iv[Ntab];
         float temp;
 
         if(*idum<=0 || !iy)
@@ -40,10 +42,10 @@ float Uniform(long *idum)
 /* Returns Gaussian RV ~ N(0,1)                            */
 /* Uses Uniform from above, use seed<-1                    */
 /***********************************************************/
-float Gaussian(long *idum)
+float Gaussian(int32_t *idum)
 {
         
-        static int iset=0;
+        static int32_t iset=0;
         static float gset;
         float fac,rsq,v1,v2;
         

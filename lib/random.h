@@ -2,8 +2,9 @@
 #ifndef RANDOM
 #define RANDOM
 
-
+#include <inttypes.h>
 #include <math.h>
+
 
 #define Ia   16807
 #define Im   2147483647
@@ -17,10 +18,10 @@
  
 // extern float drand48();
  
-float Uniform(long *idum);
+float Uniform(int32_t *idum);
 /*Returns a uniform RV in (0,1) - Any seed<-1 can be used*/
  
-float Gaussian(long *idum); 
+float Gaussian(int32_t *idum); 
 /*Returns a Gaussian RV ~ N(0,1) - Uses  Uniform from above - 
                                  - Any seed<-1 can be used */
 

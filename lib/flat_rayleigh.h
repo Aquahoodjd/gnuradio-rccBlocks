@@ -9,6 +9,7 @@
  *****************************************************************************/
 #include <iostream>
 #include <fstream>
+#include <inttypes.h>
 #include "complex.h"
 
 using namespace std;
@@ -16,14 +17,14 @@ using namespace std;
 class flat_rayleigh
 {
   protected:
-  long chan_seed;	/* the random channel seed */
+  int32_t chan_seed;	/* the random channel seed */
   bool IndepFlag;	/* 1 if i.i.d. blocks, 0 if continuous across blocks */
   float PWR;		/* the power of the fading waveform */
   Complex chan_val;	/* the flat fading complex coefficient of the channel */
-  int K;        /* the number of biquads for my ellipsoid-algorithm design */
-  int H, H2;    /* number of interpolating coefs (one sided). H2=2*H */
-  int I;        /* the interpolation factor, given by 0.2/fD */
-  int last_i, IP;   /* helpful indices: IP=Insertion Point into buff_f */
+  int32_t K;        /* the number of biquads for my ellipsoid-algorithm design */
+  int32_t H, H2;    /* number of interpolating coefs (one sided). H2=2*H */
+  int32_t I;        /* the interpolation factor, given by 0.2/fD */
+  int32_t last_i, IP;   /* helpful indices: IP=Insertion Point into buff_f */
   float *a, *b, *c, *d, Ao;  /* biquad coefs, and gain */
   float **sinc_matrix;
   Complex **st;    /* state of the K biquads */
@@ -31,7 +32,7 @@ class flat_rayleigh
   float *buff_sinc; /* pointer to the pertinent row of the interp. matrix */
   
   public:
-  flat_rayleigh(int seed, float fD, float pwr, bool flag_indep);
+  flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep);
   ~flat_rayleigh()
     {
       delete [] a;
@@ -42,9 +43,9 @@ class flat_rayleigh
       delete [] buff_f;
       delete [] sinc_matrix;
     }
-  void pass_through(int length, Complex *inp, Complex *outp);
-  void pass_through(int length, Complex *inp, Complex *outp, Complex *csi);
-  void pass_through(int length, Complex *inp, Complex *outp, float *amp_csi);
+  void pass_through(int32_t length, Complex *inp, Complex *outp);
+  void pass_through(int32_t length, Complex *inp, Complex *outp, Complex *csi);
+  void pass_through(int32_t length, Complex *inp, Complex *outp, float *amp_csi);
 };
 
 #endif
