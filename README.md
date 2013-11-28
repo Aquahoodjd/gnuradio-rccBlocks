@@ -5,9 +5,9 @@ CMake based project for GNU Radio (>=v3.6) custom signal processing blocks, incl
 
 Build instructions:
 
-mkdir build
-cd build
-cmake ../
-make
-sudo make install
-sudo ldconfig
+    mkdir build
+    cd build
+    cmake ../
+    make
+    sudo make install
+    sudo ldconfig
