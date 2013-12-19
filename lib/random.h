@@ -6,12 +6,12 @@
 #include <math.h>
 
 
-#define Ia   16807
-#define Im   2147483647
-#define Am   (1.0/Im)
-#define Iq   127773
-#define Ir   2836
-#define Ntab 32
+#define Ia   (int32_t)16807
+#define Im   (int32_t)2147483647
+#define Am   (float)(1.0/Im)
+#define Iq   (int32_t)127773
+#define Ir   (int32_t)2836
+#define Ntab (int32_t)32
 #define Ndiv (1+(Im-1)/Ntab)
 #define Eps  1.2e-7
 #define Rnmx (1.0-Eps)

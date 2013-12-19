@@ -9,7 +9,7 @@
 #define PI 3.14159265358979
 
 /**************** Constructor ***************************************/
-flat_rayleigh::flat_rayleigh(int seed, float fD, float pwr, bool flag_indep)
+flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
 {
   chan_seed = seed; //-23;
   PWR = pwr;
@@ -20,9 +20,9 @@ flat_rayleigh::flat_rayleigh(int seed, float fD, float pwr, bool flag_indep)
 	  cout << "Warning: Discrete Doppler fDT > 0.2, handled as fDT=0.2 exactly" << endl;
 	  I = 1;
   } else
-	  I = (int) (0.2 / fD);
+	  I = (int32_t) (0.2 / fD);
   last_i = 0; IP = 0;
-  int i, t, j, k;
+  int32_t i, t, j, k;
   
   a = new float [K];
   b = new float [K];
@@ -114,9 +114,9 @@ flat_rayleigh::flat_rayleigh(int seed, float fD, float pwr, bool flag_indep)
 
 
 /******* Function pass_through, without providing any CSI ************/
-void flat_rayleigh::pass_through(int length, Complex *inp, Complex *outp)
+void flat_rayleigh::pass_through(int32_t length, Complex *inp, Complex *outp)
 {
-  register int k, j, t;
+  register int32_t k, j, t;
 
   if (IndepFlag) {
 	  chan_seed += 1;	// reset the seed
@@ -183,10 +183,10 @@ void flat_rayleigh::pass_through(int length, Complex *inp, Complex *outp)
 
 
 /******* Overloaded Function pass_through, providing CSI also ************/
-void flat_rayleigh::pass_through(int length, Complex *inp,
+void flat_rayleigh::pass_through(int32_t length, Complex *inp,
                                     Complex *outp, Complex *csi)
 {
-  register int k, j, t;
+  register int32_t k, j, t;
 
   if (IndepFlag) {
 	  chan_seed += 1;	// reset the seed
@@ -253,10 +253,10 @@ void flat_rayleigh::pass_through(int length, Complex *inp,
 
 
 /***** Overloaded Function pass_through, providing AMPLITUDE CSI only *****/
-void flat_rayleigh::pass_through(int length, Complex *inp,
+void flat_rayleigh::pass_through(int32_t length, Complex *inp,
                                  Complex *outp, float *amp_csi)
 {
-  register int k, j, t;
+  register int32_t k, j, t;
 
   if (IndepFlag) {
 	  chan_seed += 1;	// reset the seed
