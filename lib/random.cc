@@ -2,6 +2,80 @@
 #include <math.h>
 #include "random.h"
 
+#define COMMANDLINE 0
+/******************************************************************************/
+#if 0
+float genunf ( float low, float high )
+
+/******************************************************************************/
+/*
+  Purpose:
+
+    GENUNF generates a uniform random deviate.
+
+  Discussion:
+
+    This procedure generates a real deviate uniformly distributed between
+    LOW and HIGH.
+
+  Licensing:
+
+    This code is distributed under the GNU LGPL license.
+
+  Modified:
+
+    01 April 2013
+
+  Author:
+
+    Original FORTRAN77 version by Barry Brown, James Lovato.
+    C version by John Burkardt.
+
+  Parameters:
+
+    Input, float LOW, HIGH, the lower and upper bounds.
+
+    Output, float GENUNF, a random deviate from the distribution.
+*/
+{
+  float value;
+
+  value = low + ( high - low ) * r4_uniform_01 ( );
+
+  return value;
+}
+#endif
+#if COMMANDLINE == 1
+int32_t main(int32_t argc, char *argv[])
+{
+    int32_t seed = -3476;
+    int32_t j;
+    float r;
+    int32_t number;
+
+    
+
+    if (argc !=2) /* argc should be 2 for correct operation*/
+    {
+        /*We print argv[0] assuming it is the program name*/
+        printf("Usage: %s number_of_random_variables\n\n",argv[0]);
+    }
+    else
+    {
+        number = atoi(argv[1]);
+        for(j=0;j<=number;j++)
+        {
+            r = Uniform(&seed);
+            printf("%f\n",r);
+        }
+    }
+
+    
+
+    return 0;
+    
+}
+#endif
 /***********************************************************/
 /* Returns a uniform RV in (0,1)                           */
 /* Any seed<-1 can be used                                 */

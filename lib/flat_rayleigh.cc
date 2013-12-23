@@ -3,8 +3,9 @@
  * Date: January 4, 2000.                                                    *
  * Content: C++ code file for the CLASS "flat_rayleigh".                     *
  *****************************************************************************/
-
+#include <string>
 #include "flat_rayleigh.h"
+ using namespace std;
 
 #define PI 3.14159265358979
 
@@ -20,7 +21,8 @@ flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
 	  cout << "Warning: Discrete Doppler fDT > 0.2, handled as fDT=0.2 exactly" << endl;
 	  I = 1;
   } else
-	  I = (int32_t) (0.2 / fD);
+	
+  I = (int32_t) (0.2 / fD);
   last_i = 0; IP = 0;
   int32_t i, t, j, k;
   
