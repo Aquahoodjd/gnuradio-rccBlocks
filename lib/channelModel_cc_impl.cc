@@ -47,6 +47,8 @@ static const int32_t MAX_OUT = 1;	// maximum number of output streams
       : gr_sync_block("channelModel_cc",
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)),
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)))
+          
+   
     {
 	    mychan = new flat_rayleigh(seed, fD, pwr, flag_indep);	
     }
@@ -57,8 +59,15 @@ static const int32_t MAX_OUT = 1;	// maximum number of output streams
     channelModel_cc_impl::~channelModel_cc_impl()
     {
 	    // frees the allocated memory.
-		delete mychan;
+		  delete mychan;
     }
+
+    void channelModel_cc_impl::set_dopplerFreq(float fD)
+    {
+       mychan->set_dopplerFreq(fD);
+    }
+
+    
 
     int32_t
     channelModel_cc_impl::work(int32_t noutput_items,

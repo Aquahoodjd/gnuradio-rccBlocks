@@ -17,13 +17,32 @@ flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
   IndepFlag = flag_indep;
   chan_val = Complex(0.0, 0.0);
   K = 7; H = 7; H2 = 2*H;
+  #if 0
   if (fD > 0.2) {
 	  cout << "Warning: Discrete Doppler fDT > 0.2, handled as fDT=0.2 exactly" << endl;
 	  I = 1;
   } else
 	
   I = (int32_t) (0.2 / fD);
-  last_i = 0; IP = 0;
+  I = 
+  #endif
+  set_dopplerFreq(fD);
+  
+}
+
+void flat_rayleigh::set_dopplerFreq(float fD)
+{
+	if (fD > 0.2)
+	{
+	    cout << "Warning: Discrete Doppler fDT > 0.2, handled as fDT=0.2 exactly" << endl;
+	    I = 1;
+    } 
+    else
+    {
+    	I = (int32_t) (0.2 / fD);
+    }
+
+    last_i = 0; IP = 0;
   int32_t i, t, j, k;
   
   a = new float [K];
@@ -111,9 +130,10 @@ flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
       last_i++;
 	// stop here, no need to interpolate, since idle run
   }
+	
+  
+
 }
-
-
 
 /******* Function pass_through, without providing any CSI ************/
 void flat_rayleigh::pass_through(int32_t length, Complex *inp, Complex *outp)

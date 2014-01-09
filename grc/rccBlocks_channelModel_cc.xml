@@ -6,6 +6,7 @@
   <import>import rccBlocks</import>
   <import>from random import randint</import>
   <make>rccBlocks.channelModel_cc($seed, $fD, $pwr, $flag_indep)</make>
+  <callback>set_dopplerFreq($fD)</callback>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -14,7 +15,7 @@
   <param>
     <name>RandomSeed</name>
 	<key>seed</key>
-	<value>randint(-10e3, 10e3)</value>
+	<value>randint(-10e3, 0)</value>
 	<type>int</type>
   </param>
   
