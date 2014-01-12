@@ -34,12 +34,12 @@ namespace gr {
      flat_rayleigh *mychan;
 
      public:
-      channelModel_cc_impl(int seed, float fD, float pwr, bool flag_indep);
+      channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep);
       ~channelModel_cc_impl();
       void set_dopplerFreq(float fD);
 
       // Where all the action really happens
-      int work(int noutput_items,
+      int32_t work(int noutput_items,
 	       gr_vector_const_void_star &input_items,
 	       gr_vector_void_star &output_items);
       

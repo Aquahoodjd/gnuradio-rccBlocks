@@ -35,10 +35,10 @@ namespace gr {
     {
       return gnuradio::get_initial_sptr (new channelModel_cc_impl(seed, fD, pwr, flag_indep));
     }
-static const int32_t MIN_IN = 1;	// mininum number of input streams
-static const int32_t MAX_IN = 1;	// maximum number of input streams
-static const int32_t MIN_OUT = 1;	// minimum number of output streams
-static const int32_t MAX_OUT = 1;	// maximum number of output streams
+    static const int32_t MIN_IN = 1;	// mininum number of input streams
+    static const int32_t MAX_IN = 1;	// maximum number of input streams
+    static const int32_t MIN_OUT = 1;	// minimum number of output streams
+    static const int32_t MAX_OUT = 1;	// maximum number of output streams
 
     /*
      * The private constructor
@@ -50,7 +50,8 @@ static const int32_t MAX_OUT = 1;	// maximum number of output streams
           
    
     {
-	    mychan = new flat_rayleigh(seed, fD, pwr, flag_indep);	
+	    mychan = new flat_rayleigh(seed, fD, pwr, flag_indep);
+      set_dopplerFreq(fD);	
     }
 
     /*
@@ -75,11 +76,11 @@ static const int32_t MAX_OUT = 1;	// maximum number of output streams
 			  gr_vector_void_star &output_items)
     {
         Complex *in = (Complex *) input_items[0];
-		Complex *out = (Complex *) output_items[0];
+		    Complex *out = (Complex *) output_items[0];
 
         
-		// Performs the channel fading.
-		mychan->pass_through(noutput_items, in, out);
+    		// Performs the channel fading.
+    		mychan->pass_through(noutput_items, in, out);
         // Tell runtime system how many input items we consumed on
         // each input stream.
 

@@ -46,7 +46,8 @@ namespace gr {
        * class. rccBlocks::channelModel_cc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int seed, float fD, float pwr, bool flag_indep);
+      static sptr make(int32_t seed, float fD, float pwr, bool flag_indep);
+      virtual void set_dopplerFreq(float fD) = 0;
     };
 
   } // namespace rccBlocks
