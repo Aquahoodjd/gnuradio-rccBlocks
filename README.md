@@ -11,3 +11,13 @@ Build instructions:
     make
     sudo make install
     sudo ldconfig
+
+Build instructions for E100 USRP:
+
+    mkdir build
+    cd build
+    cmake -DCMAKE_TOOLCHAIN_FILE=../arm_cortex_a8_native.cmake ../
+    make
+    sudo make install
+    sudo ldconfig
+
