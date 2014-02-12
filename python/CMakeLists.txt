@@ -33,7 +33,8 @@ GR_PYTHON_INSTALL(
     __init__.py
     square3_ff.py
     sinad_ff.py
-    multipath_rayleigh_cc.py DESTINATION ${GR_PYTHON_DIR}/rccBlocks
+    multipath_rayleigh_cc.py
+    VNXLabBrick.py DESTINATION ${GR_PYTHON_DIR}/rccBlocks
 )
 
 ########################################################################

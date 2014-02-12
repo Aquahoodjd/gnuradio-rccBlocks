@@ -48,6 +48,7 @@ from rccBlocks_swig import *
 from square3_ff import square3_ff
 from sinad_ff import sinad_ff
 from multipath_rayleigh_cc import multipath_rayleigh_cc
+from VNXLabBrick import VNXLabBrick
 #
 
 # ----------------------------------------------------------------

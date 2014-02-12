@@ -22,5 +22,6 @@ install(FILES
     rccBlocks_square3_ff.xml
     rccBlocks_sinad_ff.xml
     rccBlocks_channelModel_cc.xml
-    rccBlocks_multipath_rayleigh_cc.xml DESTINATION share/gnuradio/grc/blocks
+    rccBlocks_multipath_rayleigh_cc.xml
+    rccBlocks_VNXLabBrick.xml DESTINATION share/gnuradio/grc/blocks
 )
