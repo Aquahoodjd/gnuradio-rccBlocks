@@ -45,7 +45,7 @@ if _RTLD_GLOBAL != 0:
 from rccBlocks_swig import *
 
 # import any pure python here
-from square3_ff import square3_ff
+
 from sinad_ff import sinad_ff
 from multipath_rayleigh_cc import multipath_rayleigh_cc
 from VNXLabBrick import VNXLabBrick

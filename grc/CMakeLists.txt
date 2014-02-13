@@ -17,9 +17,7 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-    rccBlocks_square_ff.xml
     rccBlocks_square2_ff.xml
-    rccBlocks_square3_ff.xml
     rccBlocks_sinad_ff.xml
     rccBlocks_channelModel_cc.xml
     rccBlocks_multipath_rayleigh_cc.xml
