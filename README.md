@@ -1,7 +1,7 @@
 gnuradio-rccBlocks
 ==================
 
-CMake based project for GNU Radio (>=v3.6) custom signal processing blocks, including a multipath rayleigh fading simulator.
+CMake based project for GNU Radio (v3.6 <= x < v3.7) custom signal processing blocks, including a multipath rayleigh fading simulator.
 
 Build instructions:
 
