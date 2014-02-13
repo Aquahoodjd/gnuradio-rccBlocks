@@ -22,7 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    square2_ff.h
     flat_rayleigh_cc.h
     channelModel_cc.h DESTINATION include/rccBlocks
 )

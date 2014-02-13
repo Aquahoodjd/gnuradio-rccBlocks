@@ -27,7 +27,6 @@ include_directories(${Boost_INCLUDE_DIR} )
 
 link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND rccBlocks_sources
-    square2_ff_impl.cc
     flat_rayleigh.cc
     random.cc
     channelModel_cc_impl.cc)
