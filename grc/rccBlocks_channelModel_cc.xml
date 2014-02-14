@@ -5,8 +5,9 @@
   <category>rccBlocks</category>
   <import>import rccBlocks</import>
   <import>from random import randint</import>
-  <make>rccBlocks.channelModel_cc($seed, $fD, $pwr, $flag_indep)</make>
+  <make>rccBlocks.channelModel_cc($seed, $fD, $pwr, $flag_indep, $mode)</make>
   <callback>set_dopplerFreq($fD)</callback>
+  <callback>set_fadeMode($mode)</callback>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -38,6 +39,13 @@
 		<key>flag_indep</key>
 		<type>bool</type>
 	</param>
+
+  <param>
+    <name>Fade Mode</name>
+    <key>mode</key>
+    <value>0</value>
+    <type>bool</type>
+  </param>
 
   <!-- Make one 'sink' node per input. Sub-nodes:
        * name (an identifier for the GUI)

@@ -34,9 +34,11 @@ namespace gr {
      flat_rayleigh *mychan;
 
      public:
-      channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep);
+      channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep, bool mode);
       ~channelModel_cc_impl();
       void set_dopplerFreq(float fD);
+      void set_fadeMode(bool mode);
+      bool get_fadeMode(void);
 
       // Where all the action really happens
       int32_t work(int noutput_items,

@@ -10,12 +10,13 @@
 #define PI 3.14159265358979
 
 /**************** Constructor ***************************************/
-flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
+flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep, bool mode)
 {
   chan_seed = seed; //-23;
   PWR = pwr;
   IndepFlag = flag_indep;
   chan_val = Complex(0.0, 0.0);
+  fadeMode = mode;
   K = 7; H = 7; H2 = 2*H;
   #if 0
   if (fD > 0.2) {
@@ -28,6 +29,16 @@ flat_rayleigh::flat_rayleigh(int32_t seed, float fD, float pwr, bool flag_indep)
   #endif
   set_dopplerFreq(fD);
   
+}
+
+void flat_rayleigh::set_fadeMode(bool mode)
+{
+  fadeMode = mode;
+}
+
+bool flat_rayleigh::get_fadeMode(void)
+{
+  return fadeMode;
 }
 
 void flat_rayleigh::set_dopplerFreq(float fD)
@@ -133,6 +144,17 @@ void flat_rayleigh::set_dopplerFreq(float fD)
 	
   
 
+}
+
+/******* Overloaded Function pass through, output = input ****************/
+void flat_rayleigh::no_fading(int32_t length, Complex *inp, Complex *outp)
+{
+  register int32_t t;
+
+  for (t=0; t<length; t++) 
+  {
+    outp[t] = inp[t];
+  }
 }
 
 /******* Function pass_through, without providing any CSI ************/

@@ -31,9 +31,9 @@ namespace gr {
   namespace rccBlocks {
 
     channelModel_cc::sptr
-    channelModel_cc::make(int32_t seed, float fD, float pwr, bool flag_indep)
+    channelModel_cc::make(int32_t seed, float fD, float pwr, bool flag_indep, bool mode)
     {
-      return gnuradio::get_initial_sptr (new channelModel_cc_impl(seed, fD, pwr, flag_indep));
+      return gnuradio::get_initial_sptr (new channelModel_cc_impl(seed, fD, pwr, flag_indep, mode));
     }
     static const int32_t MIN_IN = 1;	// mininum number of input streams
     static const int32_t MAX_IN = 1;	// maximum number of input streams
@@ -43,15 +43,16 @@ namespace gr {
     /*
      * The private constructor
      */
-    channelModel_cc_impl::channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep)
+    channelModel_cc_impl::channelModel_cc_impl(int32_t seed, float fD, float pwr, bool flag_indep, bool mode)
       : gr_sync_block("channelModel_cc",
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)),
 		      gr_make_io_signature(MIN_IN, MAX_IN, sizeof (gr_complex)))
           
    
     {
-	    mychan = new flat_rayleigh(seed, fD, pwr, flag_indep);
+	    mychan = new flat_rayleigh(seed, fD, pwr, flag_indep, mode);
       set_dopplerFreq(fD);	
+      set_fadeMode(mode);
     }
 
     /*
@@ -68,6 +69,16 @@ namespace gr {
        mychan->set_dopplerFreq(fD);
     }
 
+    void channelModel_cc_impl::set_fadeMode(bool mode)
+    {
+       mychan->set_fadeMode(mode);
+    }
+
+    /*bool channelModel_cc_impl::get_fadeMode()
+    {
+       return mychan->get_fadeMode(mode);
+    }*/
+
     
 
     int32_t
@@ -80,7 +91,15 @@ namespace gr {
 
         
     		// Performs the channel fading.
-    		mychan->pass_through(noutput_items, in, out);
+    		if (mychan->get_fadeMode() == 0)
+    		{
+    			mychan->no_fading(noutput_items, in, out);
+    		}
+    		else
+    		{
+    			mychan->pass_through(noutput_items, in, out);
+    		}
+    		
         // Tell runtime system how many input items we consumed on
         // each input stream.
 

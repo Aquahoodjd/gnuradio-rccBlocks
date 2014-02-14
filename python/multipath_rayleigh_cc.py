@@ -75,6 +75,7 @@ class multipath_rayleigh_cc(gr.hier_block2):
 		self.chan_pwrs = chan_pwrs
 		self.path_delays_us = path_delays
 		self.chan_seed = chan_seed
+		self.mode = 1 #Enables fading for underlaying single path fading block
            
 		# Checks that there is the same number of delays as there are powers.
 		if len(self.chan_pwrs) != len(self.path_delays_us):
@@ -134,7 +135,7 @@ class multipath_rayleigh_cc(gr.hier_block2):
 			# Delay block is required.
 			self.delay_blks.append(gr.delay(gr.sizeof_gr_complex*1, int(self.path_delays_samples[i])))
 				
-			self.chan_blks.append(rccBlocks.channelModel_cc(chan_seed + i, self.fdT, self.chan_pwrs[i], flag_indep))
+			self.chan_blks.append(rccBlocks.channelModel_cc(chan_seed + i, self.fdT, self.chan_pwrs[i], flag_indep,self.mode))
 		
 		
 		self.sum = gr.add_vcc(1)  
