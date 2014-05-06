@@ -4,7 +4,7 @@
 # Title: Static RF or Single Path Rayleigh Faded RF
 # Author: Richard Clarke
 # Description: Provides either static RF or single path Rayleigh faded RF at specified doppler spread
-# Generated: Fri Feb 14 14:51:05 2014
+# Generated: Fri Feb 14 00:39:59 2014
 ##################################################
 
 from gnuradio import blocks
@@ -19,6 +19,7 @@ import SimpleXMLRPCServer
 import rccBlocks
 import threading
 import time
+import os
 
 class e100_fading_vaunix_cmdline(gr.top_block):
 
@@ -100,9 +101,9 @@ class e100_fading_vaunix_cmdline(gr.top_block):
 
 	def set_usrpRate(self, usrpRate):
 		self.usrpRate = usrpRate
-		self.blocks_throttle_0.set_sample_rate(self.usrpRate)
 		self.set_fdTs(self.fd*(1.0/self.usrpRate))
 		self.uhd_usrp_sink_0_0_0.set_samp_rate(self.usrpRate)
+		self.blocks_throttle_0.set_sample_rate(self.usrpRate)
 
 	def get_fdTs(self):
 		return self.fdTs
@@ -138,4 +139,7 @@ if __name__ == '__main__':
 	tb.start()
 	raw_input('Press Enter to quit: ')
 	tb.stop()
+	#Process hangs here and doesn't terminate, need something to kill it here
+	time.sleep(1)
+	os._exit(0)
 

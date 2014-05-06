@@ -1,65 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Feb 14 14:50:43 2014</timestamp>
-  <block>
-    <key>options</key>
-    <param>
-      <key>id</key>
-      <value>RayleighFadedUSRP_RF</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>title</key>
-      <value>Static RF or Single Path Rayleigh Faded RF</value>
-    </param>
-    <param>
-      <key>author</key>
-      <value>Richard Clarke</value>
-    </param>
-    <param>
-      <key>description</key>
-      <value>Provides either static RF or single path Rayleigh faded RF at specified doppler spread</value>
-    </param>
-    <param>
-      <key>window_size</key>
-      <value>1280, 1024</value>
-    </param>
-    <param>
-      <key>generate_options</key>
-      <value>qt_gui</value>
-    </param>
-    <param>
-      <key>category</key>
-      <value>Custom</value>
-    </param>
-    <param>
-      <key>run_options</key>
-      <value>prompt</value>
-    </param>
-    <param>
-      <key>run</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>max_nouts</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>realtime_scheduling</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(10, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
+  <timestamp>Fri Feb 14 01:01:25 2014</timestamp>
   <block>
     <key>variable</key>
     <param>
@@ -127,157 +68,6 @@
     <param>
       <key>_coordinate</key>
       <value>(818, 153)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>const_source_x</key>
-    <param>
-      <key>id</key>
-      <value>const_source_x_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>const</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(536, 249)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_throttle</key>
-    <param>
-      <key>id</key>
-      <value>blocks_throttle_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>usrpRate</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(760, 248)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>rccBlocks_VNXLabBrick</key>
-    <param>
-      <key>id</key>
-      <value>rccBlocks_VNXLabBrick_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>atten</key>
-      <value>atten</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(957, 250)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>rccBlocks_channelModel_cc</key>
-    <param>
-      <key>id</key>
-      <value>rccBlocks_channelModel_cc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>seed</key>
-      <value>randint(-10000,0)</value>
-    </param>
-    <param>
-      <key>fD</key>
-      <value>fdTs</value>
-    </param>
-    <param>
-      <key>pwr</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>flag_indep</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>mode</key>
-      <value>fadeMode</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(316, 342)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_multiply_const_vxx</key>
-    <param>
-      <key>id</key>
-      <value>blocks_multiply_const_vxx_1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>const</key>
-      <value>baseband_multiplier</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(600, 376)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -484,6 +274,157 @@
     <param>
       <key>_coordinate</key>
       <value>(790, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>rccBlocks_channelModel_cc</key>
+    <param>
+      <key>id</key>
+      <value>rccBlocks_channelModel_cc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>seed</key>
+      <value>randint(-10000,0)</value>
+    </param>
+    <param>
+      <key>fD</key>
+      <value>fdTs</value>
+    </param>
+    <param>
+      <key>pwr</key>
+      <value>1.0</value>
+    </param>
+    <param>
+      <key>flag_indep</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>mode</key>
+      <value>fadeMode</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(274, 344)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_multiply_const_vxx</key>
+    <param>
+      <key>id</key>
+      <value>blocks_multiply_const_vxx_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>baseband_multiplier</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(514, 376)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>const_source_x</key>
+    <param>
+      <key>id</key>
+      <value>const_source_x_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>1.0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(199, 248)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_throttle</key>
+    <param>
+      <key>id</key>
+      <value>blocks_throttle_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>samples_per_second</key>
+      <value>usrpRate</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(420, 248)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>rccBlocks_VNXLabBrick</key>
+    <param>
+      <key>id</key>
+      <value>rccBlocks_VNXLabBrick_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>atten</key>
+      <value>atten</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(638, 250)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1146,7 +1087,66 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 350)</value>
+      <value>(701, 354)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>options</key>
+    <param>
+      <key>id</key>
+      <value>e100_fading_vaunix_qtgui</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>title</key>
+      <value>Static RF or Single Path Rayleigh Faded RF</value>
+    </param>
+    <param>
+      <key>author</key>
+      <value>Richard Clarke</value>
+    </param>
+    <param>
+      <key>description</key>
+      <value>Provides either static RF or single path Rayleigh faded RF at specified doppler spread</value>
+    </param>
+    <param>
+      <key>window_size</key>
+      <value>1280, 1024</value>
+    </param>
+    <param>
+      <key>generate_options</key>
+      <value>qt_gui</value>
+    </param>
+    <param>
+      <key>category</key>
+      <value>Custom</value>
+    </param>
+    <param>
+      <key>run_options</key>
+      <value>prompt</value>
+    </param>
+    <param>
+      <key>run</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>max_nouts</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>realtime_scheduling</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(10, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
