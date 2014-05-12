@@ -87,18 +87,18 @@ namespace gr {
 			  gr_vector_void_star &output_items)
     {
         Complex *in = (Complex *) input_items[0];
-		    Complex *out = (Complex *) output_items[0];
+		Complex *out = (Complex *) output_items[0];
 
         
-    		// Performs the channel fading.
-    		if (mychan->get_fadeMode() == 0)
-    		{
-    			mychan->no_fading(noutput_items, in, out);
-    		}
-    		else
-    		{
-    			mychan->pass_through(noutput_items, in, out);
-    		}
+		// Performs the channel fading.
+		if (mychan->get_fadeMode() == 0)
+		{
+			mychan->no_fading(noutput_items, in, out);
+		}
+		else
+		{
+			mychan->pass_through(noutput_items, in, out);
+		}
     		
         // Tell runtime system how many input items we consumed on
         // each input stream.

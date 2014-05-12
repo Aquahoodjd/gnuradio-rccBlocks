@@ -23,7 +23,7 @@
   <param>
 		<name>Doppler-Bandwidth </name>
 		<key>fD</key>
-		<value>0.0</value>
+		<value>200e-6</value>
 		<type>real</type>
 	</param>
 
