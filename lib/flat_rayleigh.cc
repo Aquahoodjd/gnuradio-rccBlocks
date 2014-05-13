@@ -230,6 +230,8 @@ void flat_rayleigh::pass_through(int32_t length, Complex *inp,
 {
   register int32_t k, j, t;
 
+  doppler_lock.lock();
+
   if (IndepFlag) {
 	  chan_seed += 1;	// reset the seed
 	  // clean-up and then run idle, to ensure transients are dead
@@ -290,6 +292,7 @@ void flat_rayleigh::pass_through(int32_t length, Complex *inp,
     csi[t] = chan_val;
     outp[t] = inp[t] * chan_val;
   }
+  doppler_lock.unlock();
 }
 
 
@@ -299,6 +302,7 @@ void flat_rayleigh::pass_through(int32_t length, Complex *inp,
                                  Complex *outp, float *amp_csi)
 {
   register int32_t k, j, t;
+  doppler_lock.lock();
 
   if (IndepFlag) {
 	  chan_seed += 1;	// reset the seed
@@ -360,6 +364,8 @@ void flat_rayleigh::pass_through(int32_t length, Complex *inp,
     amp_csi[t] = sqrt(abs(chan_val));
     outp[t] = inp[t] * chan_val;
   }
+
+  doppler_lock.unlock();
 }
     
     

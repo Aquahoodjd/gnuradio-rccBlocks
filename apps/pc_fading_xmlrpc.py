@@ -4,7 +4,7 @@
 # Title: Static RF or Single Path Rayleigh Faded RF
 # Author: Richard Clarke
 # Description: Provides either static RF or single path Rayleigh faded RF at specified doppler spread
-# Generated: Tue May 13 11:53:46 2014
+# Generated: Tue May 13 13:13:41 2014
 ##################################################
 
 from gnuradio import blocks

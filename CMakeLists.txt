@@ -102,7 +102,7 @@ endif()
 ########################################################################
 # Setup the include and linker paths
 ########################################################################
-SET(CMAKE_CXX_FLAGS "-std=c++11")
+SET(CMAKE_CXX_FLAGS "-std=c++0x")
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${Boost_INCLUDE_DIRS}
