@@ -19,6 +19,7 @@ import SimpleXMLRPCServer
 import rccBlocks
 import threading
 import time
+import os
 
 class e100_fading(gr.top_block):
 
@@ -138,4 +139,5 @@ if __name__ == '__main__':
 	tb.start()
 	raw_input('Press Enter to quit: ')
 	tb.stop()
+	os._exit(0)
 
